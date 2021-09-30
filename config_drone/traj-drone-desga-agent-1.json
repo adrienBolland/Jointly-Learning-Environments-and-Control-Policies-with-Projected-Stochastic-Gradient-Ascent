@@ -1,0 +1,116 @@
+{
+  "system": {
+    "name": "DroneTrajectory",
+    "init": {
+      "horizon": 100,
+      "lambda_speed": 0.3,
+      "lambda_nom": 0.0,
+      "max_speed": 1.0,
+      "wind_mu": [0.0, 0.0, 0.0],
+      "wind_std": [0.01, 0.01, 0.01],
+      "discrete_time": 0.07,
+      "euler_time": 0.07,
+      "radius_x": 1.5,
+      "radius_y": 1.0,
+      "feasible_set": {
+        "arm": [0.05, 0.2],
+        "radius": [0.01, 0.2],
+        "thickness": [0.001, 0.01],
+        "width": [0.001, 0.01],
+        "speed": [-50, 50]
+      }
+    },
+
+    "wrappers": {
+
+      "wrapper1": {
+        "name": "ParameterScaleWrapper",
+        "init": {
+          "loc": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+          "scale": [0.2, 0.2, 0.01, 0.01, 1.0, 1.0, 1.0, 1.0]
+        }
+      },
+
+      "wrapper2": {
+        "name": "StateClipWrapper",
+        "init": {
+          "min": -100.0,
+          "max": 100.0
+        }
+      },
+
+      "wrapper3": {
+        "name": "ActionClipWrapper",
+        "init": {
+          "max": 20.0
+        }
+      },
+
+      "wrapper4": {
+        "name": "StationarySpeedScaleWrapper",
+        "init": {
+
+        }
+      },
+
+      "wrapper5": {
+        "name": "StateScaleWrapper",
+        "init": {
+          "loc": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+          "scale": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.1, 0.1, 0.1, 1.0, 1.0, 0.1]
+        }
+      },
+
+      "wrapper6": {
+        "name": "StationarySystemWrapper",
+
+        "init": {
+
+        }
+      }
+    }
+  },
+
+  "agent": {
+    "name": "DSSAAgent",
+    "init": {
+      "InvestmentModel": "DeterministicParameterModel",
+      "OperationModel": "GaussianDistModel"
+    },
+
+    "initialize": {
+      "investment_pol": {
+
+      },
+
+      "operation_pol": {
+        "layers": [64],
+        "act_fun": "Tanh",
+        "correlated": false,
+        "scale": 30.0
+      }
+    }
+  },
+
+  "experiment": {
+    "seed": {
+      "value": 1234
+    },
+
+    "load": {
+      "path": "exp_drone/traj-drone-avg-desga-v001/run-r0"
+    },
+
+    "simulate": {
+      "runner": {
+        "name": "TrajectoriesSampler",
+
+        "init": {
+
+        }
+      },
+      "nb_simulations": 64,
+      "render": true
+    }
+  }
+}

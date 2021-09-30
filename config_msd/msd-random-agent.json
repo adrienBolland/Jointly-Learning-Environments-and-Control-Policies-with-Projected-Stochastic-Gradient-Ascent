@@ -1,0 +1,62 @@
+{
+  "system": {
+    "name": "MSDSystem",
+
+    "init": {
+      "horizon": 100,
+      "equilibrium": 0.2,
+      "actions_value": [-0.3, -0.1, 0.0, 0.1, 0.3],
+      "target_parameters_reward": [0.5, -0.3, 0.1],
+      "cost_omega_zeta": [0.5, 0.5],
+      "accuracy": 1.0,
+      "actions_discretization": 0.05,
+      "position_interval": [0.198, 0.202],
+      "speed_interval": [-0.01, 0.01],
+      "feasible_set": {
+        "omega_interval": [0.1, 1.5],
+        "zeta_interval": [0.1, 1.5],
+        "phi_interval": [-2.0, 2.0]
+      }
+    },
+
+    "wrappers": {
+      "fixed_system": {
+        "name": "FixedSysWrapper",
+
+        "init": {
+          "parameters": [0.5, 0.5, 0.5, -0.3, 0.1]
+        }
+      }
+    }
+  },
+
+  "agent": {
+    "name": "DiscreteRandomAgent",
+
+    "init": {
+
+    },
+
+    "initialize": {
+
+    }
+  },
+
+  "experiment": {
+    "seed": {
+      "value": 1234
+    },
+
+    "simulate": {
+      "runner": {
+        "name": "TrajectoriesSampler",
+
+        "init": {
+
+        }
+      },
+
+      "nb_simulations": 100
+    }
+  }
+}

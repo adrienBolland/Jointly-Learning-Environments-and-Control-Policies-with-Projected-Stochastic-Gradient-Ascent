@@ -1,0 +1,143 @@
+{
+  "system": {
+    "name": "ComplexMGSystem",
+
+    "init": {
+      "horizon": 120,
+      "dem_size": 30.0,
+      "power_rating": 1.0,
+      "charge_eff": 1.0,
+      "discharge_eff": 1.0,
+      "bat_cost": 200.0,
+      "bat_maintenance_cost": 100.0,
+      "pv_cost": 100.0,
+      "pv_maintenance_cost": 20.0,
+      "gen_cost": 1000.0,
+      "gen_maintenance_cost": 10000.0,
+      "ramp_up_cost": 0.5,
+      "ramp_down_cost": 0.0,
+      "fuel_price": 4.0,
+      "inv_rate": 0.1,
+      "inv_years": 20.0,
+      "load_curtail_price": 25.0,
+      "load_shed_price": 25.0,
+      "feasible_set": {
+        "pv_size": [20.0, 200.0],
+        "bat_size": [20.0, 200.0],
+        "gen_size": [1.6, 16.0]
+      }
+    },
+
+    "wrappers": {
+      "wrapper1": {
+        "name": "RewardScaleWrapper",
+
+        "init": {
+          "loc": -5000.0,
+          "scale": 5000.0
+        }
+      },
+
+      "wrapper2": {
+        "name": "GenVarControl",
+
+        "init": {
+
+        }
+      },
+
+      "wrapper3": {
+        "name": "ParameterScaleWrapper",
+
+        "init": {
+          "loc": [0.0, 0.0, 0.0],
+          "scale": [100.0, 100.0, 8.0]
+        }
+      },
+
+      "wrapper4": {
+        "name": "StationarySystemWrapper",
+
+        "init": {
+
+        }
+      }
+    }
+  },
+
+  "agent": {
+    "name": "DSSAAgent",
+
+    "init": {
+      "InvestmentModel": "DeterministicParameterModel",
+      "OperationModel": "GaussianDistModel"
+    },
+
+    "initialize": {
+      "investment_pol": {
+
+      },
+
+      "operation_pol": {
+        "layers": [64]
+      }
+    }
+  },
+
+  "experiment": {
+    "seed": {
+      "value": 1234
+    },
+
+    "fit": {
+      "path": {
+        "logdir": "./experiments",
+        "model_name": "cmg-env"
+      },
+
+      "logger": {
+        "name": "LoggerDESGA",
+
+        "init": {
+
+        }
+      },
+
+      "algo": {
+        "name": "ReinforceDESGA",
+
+        "init": {
+
+        },
+
+        "initialize": {
+          "nb_iterations": 20000,
+          "optimizer_policy_parameters": {
+            "lr": 0.001
+          },
+          "optimizer_investment_parameters": {
+            "lr": 0.003
+          },
+          "batch_size": 64,
+          "mc_samples": 100,
+          "system_fit": true,
+          "partial_clip": true
+        }
+      },
+
+      "save_agent": true
+    },
+
+    "simulate": {
+      "runner": {
+        "name": "TrajectoriesSampler",
+
+        "init": {
+
+        }
+      },
+
+      "nb_simulations": 64
+    }
+  }
+}

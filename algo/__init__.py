@@ -1,0 +1,2 @@
+VERBOSE = False
+VERY_VERBOSE = False
