@@ -3,7 +3,7 @@
 This repository implements a library for joint design and control of environments.
 More details on the theoretical background can be found in the following article:
 
-[***Bolland, A., Boukas, I., Berger, M., & Ernst, D. (2021). Jointly Learning Environments and Control Policies with Projected Stochastic Gradient Ascent. arXiv preprint arXiv:2006.01738v3.***](https://arxiv.org/abs/2006.01738v3)
+[***Bolland, A., Boukas, I., Berger, M., & Ernst, D. (2022). Jointly Learning Environments and Control Policies with Projected Stochastic Gradient Ascent. Journal of Artificial Intelligence Research, 73, 117-171.***](https://www.jair.org/index.php/jair/article/view/13350)
 
 ## Code organisation
 The optimization of an environment and its control policy is divided into three main parts.
