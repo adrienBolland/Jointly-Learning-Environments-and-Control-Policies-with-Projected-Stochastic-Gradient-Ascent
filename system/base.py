@@ -3,6 +3,8 @@ from collections import namedtuple
 
 import torch
 
+from system.togym import GymEnv
+
 EnvStep = namedtuple("EnvStep",
                      ["observation", "reward", "done", "env_info"])
 EnvInfo = namedtuple("EnvInfo", [])
@@ -99,7 +101,7 @@ class System(ABC):
 
     def to_gym(self):
         """ builds a gym environment """
-        raise NotImplementedError
+        return GymEnv(self)
 
     @property
     def horizon(self):

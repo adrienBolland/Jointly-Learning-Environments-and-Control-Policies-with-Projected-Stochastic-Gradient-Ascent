@@ -33,6 +33,16 @@ Two algorithm for jointly designing and controlling environments are implemented
 
 A tutorial notebook using DEPS for optimizing the MSD environment is provided in `example/msd_ex1.ipynb`.
 
+## Create virtual environment
+Create a virtual environment *venvDEPS*:
+> python3 -m venv *venvDEPS*
+
+Activate the environment:
+> source *venvDEPS*/bin/activate
+
+Install the requirements:
+> pip3 install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu111
+
 ## Launching experiments
 Out-of-the-box experiments can be launched from json configuration files with the following command:
 
