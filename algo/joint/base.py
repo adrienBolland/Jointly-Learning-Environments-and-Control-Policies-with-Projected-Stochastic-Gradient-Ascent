@@ -145,7 +145,7 @@ class BaseJointPG(BaseAlgo, ABC):
 
                 if self.policy_fit and log_writer is not None:
                     params["policy"] = self.agent._get_operation_model().named_parameters()
-                    log_writer.add_policy_histograms(action_batch.view(-1, action_batch.shape[2]), step=it)
+                    # log_writer.add_policy_histograms(action_batch.view(-1, action_batch.shape[2]), step=it)
 
                     loss["loss-policy"] = policy_loss.item()
 
